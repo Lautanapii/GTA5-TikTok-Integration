@@ -282,6 +282,27 @@ public class GTAVWebhookScript : Script
                     }
 
                     break;
+                 }
+             case "spawn_attackers":
+                 {
+                   if (Game.Player.Character.IsInAir)
+                   {
+                   Logger.Log("Cannot spawn attacker because Player IsInAir");
+                   break;
+                   }
+
+                   string[] parameters = command.custom.Split(':');
+                   string username = parameters[0];
+                   string weaponName = parameters[1]; 
+
+                   Attacker npc = new Attacker(username, weaponName);
+                   npcList.Add(npc);
+
+                   Logger.Log("Spawned Attacker " + username + " with weapon " + weaponName);
+                 }
+                 
+                 break;
+
                 }
             case "spawn_attackers_and_shoot":
                 {
